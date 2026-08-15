@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "ticker": "GRAB",
+  "company": "Grab Holdings Limited",
+  "currency": "$",
+  "researched_at": "2026-08-15",
+  "thesis": {
+    "one_liner": "SE Asian superapp with reaccelerating growth and eighteen straight quarters of adjusted EBITDA growth; the main overhang is the year-long unresolved GoTo merger saga rather than the operating business.",
+    "kill_switch": "GoTo drags on unresolved for another year while competitive incentive spending re-escalates in Indonesia, compressing margins back toward 2024 levels.",
+    "verdict": "Watchlist",
+    "conviction": 3.5
+  },
+  "valuation": {
+    "bear": 1.55,
+    "base": 5.2,
+    "bull": 8.4,
+    "current_price": 3.79
+  },
+  "kbqs": [
+    {
+      "question": "Is the profitability trajectory durable operating leverage, or dependent on temporarily reduced competitive intensity?",
+      "confidence": "Moderate"
+    },
+    {
+      "question": "Does the GoTo situation resolve value-additively, neutrally, or destructively?",
+      "confidence": "Low"
+    },
+    {
+      "question": "Can the foodpanda and Superbank integrations deliver on the 2027-2028 guided timeline?",
+      "confidence": "Moderate"
+    }
+  ],
+  "triggers": [
+    { "description": "GoTo situation resolution (any direction)", "date": null },
+    { "description": "Q3 2026 results", "date": "2026-11-12" }
+  ],
+  "summary": "Record Q2 with bookings up 22% and EBITDA up 54%, plus a new $750m buyback. Best asymmetry of the names reviewed in this batch at roughly 2.5:1. The GoTo question remains the single largest unresolved variable."
+}
