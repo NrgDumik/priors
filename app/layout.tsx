@@ -1,0 +1,22 @@
+import type { Metadata } from 'next';
+import './globals.css';
+
+export const metadata: Metadata = {
+  title: 'Priors',
+  description:
+    'Not a watchlist. A record of what you believe, and what would prove you wrong.',
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <body className="bg-slate-950 text-slate-100 min-h-screen">
+        {children}
+      </body>
+    </html>
+  );
+}
