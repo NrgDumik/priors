@@ -13,7 +13,7 @@ export async function signIn(formData: FormData) {
   if (error) {
     redirect(`/login?error=${encodeURIComponent(error.message)}`);
   }
-  redirect('/dashboard');
+  redirect('/theses');
 }
 
 export async function signUp(formData: FormData) {
@@ -30,7 +30,7 @@ export async function signUp(formData: FormData) {
   // If your Supabase project has "Confirm email" off, signUp returns a
   // session immediately — go straight in. Otherwise, tell them to check email.
   if (data.session) {
-    redirect('/dashboard');
+    redirect('/theses');
   }
   redirect(
     `/login?message=${encodeURIComponent('Check your email to confirm your account, then log in.')}`
