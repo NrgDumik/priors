@@ -18,7 +18,7 @@ export default async function ThesesPage() {
   const { data, error } = await supabase
     .from('theses')
     .select(
-      'id, user_id, ticker, name, currency, verdict, conviction, thesis, kill_switch, val_bear, val_base, val_bull, val_current, created_at, updated_at, kbqs(id, status), triggers(id, description, due_date, done)'
+      'id, user_id, ticker, name, currency, verdict, conviction, thesis, kill_switch, val_bear, val_base, val_bull, val_current, price_updated_at, created_at, updated_at, kbqs(id, status), triggers(id, description, due_date, done)'
     )
     .order('updated_at', { ascending: false });
 
