@@ -33,6 +33,13 @@ import type {
 import { CONFIDENCES, VERDICTS } from '@/lib/types';
 import { daysSince, daysUntil, formatMoney } from '@/lib/thesis-utils';
 import {
+  asymmetry,
+  formatAsymmetry,
+  formatPct,
+  upsideToBase,
+  PRICE_STALE_DAYS,
+} from '@/lib/valuation';
+import {
   Badge,
   CONF_COLORS,
   ConvictionDots,
@@ -188,7 +195,7 @@ export default function ThesisDetail({ t }: { t: FullThesis }) {
         onSave={(v) => run(() => updateThesis(t.id, { kill_switch: v }))}
       />
 
-      <Section title="Valuation">
+      <Section title="Valuation" count={valuationCaption(t)}>
         <ValuationBar
           bear={t.val_bear}
           base={t.val_base}
@@ -196,6 +203,7 @@ export default function ThesisDetail({ t }: { t: FullThesis }) {
           current={t.val_current}
           currency={t.currency}
         />
+        <ValuationMetrics t={t} />
         <div className="grid grid-cols-4 gap-2 mt-2">
           {(
             [
@@ -421,6 +429,51 @@ function ReportBody({
         <pre className="mt-2 max-h-96 overflow-auto whitespace-pre-wrap text-xs text-slate-400 bg-slate-950/60 border border-slate-800 rounded-md p-3 leading-relaxed">
           {md}
         </pre>
+      )}
+    </div>
+  );
+}
+
+function valuationCaption(t: FullThesis): string | undefined {
+  const age = daysSince(t.price_updated_at);
+  if (age === null) return undefined;
+  if (age === 0) return 'price set today';
+  return `price ${age}d old`;
+}
+
+function ValuationMetrics({ t }: { t: FullThesis }) {
+  const anchors = {
+    bear: t.val_bear,
+    base: t.val_base,
+    bull: t.val_bull,
+    current: t.val_current,
+  };
+  const upside = upsideToBase(anchors);
+  const asym = asymmetry(anchors);
+  const age = daysSince(t.price_updated_at);
+
+  if (upside === null && asym.kind === 'unknown') return null;
+
+  return (
+    <div className="flex items-center gap-5 font-mono-data text-xs mt-3 pt-3 border-t border-slate-800/60">
+      {upside !== null && (
+        <span>
+          <span className="text-slate-500">to base </span>
+          <span className={upside > 0 ? 'text-teal-400' : 'text-rose-400'}>
+            {formatPct(upside)}
+          </span>
+        </span>
+      )}
+      {asym.kind !== 'unknown' && (
+        <span>
+          <span className="text-slate-500">reward:risk </span>
+          <span className="text-slate-300">{formatAsymmetry(asym)}</span>
+        </span>
+      )}
+      {age !== null && age > PRICE_STALE_DAYS && (
+        <span className="text-amber-600/80 ml-auto">
+          price may be out of date
+        </span>
       )}
     </div>
   );
