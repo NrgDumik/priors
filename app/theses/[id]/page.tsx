@@ -21,7 +21,7 @@ export default async function ThesisPage({
   const { data } = await supabase
     .from('theses')
     .select(
-      'id, user_id, ticker, name, currency, verdict, conviction, thesis, kill_switch, val_bear, val_base, val_bull, val_current, created_at, updated_at, kbqs(id, thesis_id, question, confidence, status, sort_order, created_at, resolved_at), triggers(id, thesis_id, description, due_date, done, sort_order, created_at), history(id, thesis_id, note, source, snapshot, conviction_at_time, created_at)'
+      'id, user_id, ticker, name, currency, verdict, conviction, thesis, kill_switch, val_bear, val_base, val_bull, val_current, price_updated_at, created_at, updated_at, kbqs(id, thesis_id, question, confidence, status, sort_order, created_at, resolved_at), triggers(id, thesis_id, description, due_date, done, sort_order, created_at), history(id, thesis_id, note, source, snapshot, conviction_at_time, created_at)'
     )
     .eq('id', id)
     .maybeSingle();
