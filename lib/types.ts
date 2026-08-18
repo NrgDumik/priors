@@ -25,6 +25,8 @@ export type ThesisRow = {
   val_base: number | null;
   val_bull: number | null;
   val_current: number | null;
+  /** Stamped by DB trigger whenever val_current changes. Read-only. */
+  price_updated_at: string | null;
   created_at: string;
   updated_at: string;
 };
